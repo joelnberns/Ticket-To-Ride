@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://bq1yxwlkgtt2q"]
+
+[ext_resource type="Script" path="res://deck.gd" id="1_tiyiw"]
+[ext_resource type="Texture2D" uid="uid://fvic6jhjljcc" path="res://cards/back_card.jpg" id="3_b4gll"]
+
+[node name="Deck" type="Node"]
+script = ExtResource("1_tiyiw")
+
+[node name="DeckDraw" type="TextureButton" parent="."]
+offset_left = 113.0
+offset_top = 10.0
+offset_right = 314.0
+offset_bottom = 341.0
+pivot_offset = Vector2(100, 0)
+texture_normal = ExtResource("3_b4gll")
+texture_pressed = ExtResource("3_b4gll")
+texture_hover = ExtResource("3_b4gll")
+
+[node name="display1" type="Marker2D" parent="."]
+position = Vector2(287, 0)
+
+[node name="display2" type="Marker2D" parent="."]
+position = Vector2(287, 0)
+
+[node name="display3" type="Marker2D" parent="."]
+position = Vector2(287, 0)
+
+[node name="display4" type="Marker2D" parent="."]
+position = Vector2(287, 0)
+
+[node name="display5" type="Marker2D" parent="."]
+position = Vector2(287, 0)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="Discard" type="Marker2D" parent="."]
+position = Vector2(259, 15)
+
+[connection signal="button_down" from="DeckDraw" to="." method="_on_deck_draw_button_down"]
+[connection signal="button_up" from="DeckDraw" to="." method="_on_deck_draw_button_up"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

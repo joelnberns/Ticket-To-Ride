@@ -1,0 +1,146 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8386diiseqoo"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_5n16l"]
+[ext_resource type="Texture2D" uid="uid://cjfuc0jdds4ar" path="res://ttrBoard2.jpg" id="1_7mtma"]
+[ext_resource type="Script" path="res://routes.gd" id="4_t3fab"]
+[ext_resource type="PackedScene" uid="uid://dkilsd7txnbfn" path="res://route.tscn" id="5_ff66y"]
+[ext_resource type="PackedScene" uid="uid://bq1yxwlkgtt2q" path="res://deck.tscn" id="6_xn3vd"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_5n16l")
+
+[node name="TtrBoard2" type="Sprite2D" parent="."]
+z_index = -1000
+position = Vector2(391, 195)
+scale = Vector2(0.950692, 0.968379)
+texture = ExtResource("1_7mtma")
+centered = false
+
+[node name="Deck" parent="TtrBoard2" instance=ExtResource("6_xn3vd")]
+
+[node name="Node2D" type="Node2D" parent="TtrBoard2"]
+
+[node name="handParent" type="Node2D" parent="."]
+
+[node name="Button" type="Button" parent="."]
+offset_left = 114.0
+offset_top = 396.0
+offset_right = 349.0
+offset_bottom = 495.0
+
+[node name="Routes" type="Node" parent="."]
+script = ExtResource("4_t3fab")
+
+[node name="Vancouver-Seattle" parent="Routes" instance=ExtResource("5_ff66y")]
+offset_left = 522.0
+offset_top = 306.0
+offset_right = 534.0
+offset_bottom = 347.0
+rotation = -6.28319
+
+[node name="Vancouver-Seattle2" parent="Routes" instance=ExtResource("5_ff66y")]
+offset_left = 507.0
+offset_top = 306.0
+offset_right = 519.0
+offset_bottom = 347.0
+rotation = -6.28319
+
+[node name="Seattle-Portland" parent="Routes" instance=ExtResource("5_ff66y")]
+offset_left = 505.0
+offset_top = 359.0
+offset_right = 519.0
+offset_bottom = 400.0
+rotation = -5.83464
+
+[node name="Seattle-Portland2" parent="Routes" instance=ExtResource("5_ff66y")]
+offset_left = 516.0
+offset_top = 367.0
+offset_right = 529.0
+offset_bottom = 407.0
+rotation = -5.83464
+
+[node name="Vancouver-Calcary" parent="Routes" instance=ExtResource("5_ff66y")]
+offset_left = 651.0
+offset_top = 267.0
+offset_right = 671.0
+offset_bottom = 385.0
+rotation = -4.84852
+
+[node name="ColorRect" type="ColorRect" parent="Routes/Vancouver-Calcary"]
+visible = false
+layout_mode = 0
+offset_left = 4.85902
+offset_top = 82.422
+offset_right = 13.859
+offset_bottom = 115.422
+rotation = 0.060576
+
+[node name="ColorRect2" type="ColorRect" parent="Routes/Vancouver-Calcary"]
+visible = false
+layout_mode = 0
+offset_left = 12.6086
+offset_top = 77.4275
+offset_right = 21.6086
+offset_bottom = 110.428
+rotation = -3.10372
+
+[node name="ColorRect3" type="ColorRect" parent="Routes/Vancouver-Calcary"]
+visible = false
+layout_mode = 0
+offset_left = 7.24742
+offset_top = 6.03947
+offset_right = 16.2474
+offset_bottom = 39.0395
+rotation = 0.060576
+
+[node name="Calcary-Winnipeg" parent="Routes" instance=ExtResource("5_ff66y")]
+offset_left = 896.0
+offset_top = 230.0
+offset_right = 939.0
+offset_bottom = 459.0
+rotation = -4.76299
+
+[node name="Calcary-Helena" parent="Routes" instance=ExtResource("5_ff66y")]
+offset_left = 664.0
+offset_top = 294.0
+offset_right = 687.0
+offset_bottom = 448.0
+rotation = -6.92995
+
+[node name="Seattle-Helena" parent="Routes" instance=ExtResource("5_ff66y")]
+offset_left = 532.0
+offset_top = 381.0
+offset_right = 549.0
+offset_bottom = 607.0
+rotation = -7.64493
+
+[node name="Portland-Salt Lake City" parent="Routes" instance=ExtResource("5_ff66y")]
+offset_left = 496.0
+offset_top = 430.0
+offset_right = 532.0
+offset_bottom = 643.0
+rotation = -7.26659
+
+[node name="Helena-Salt Lake City" parent="Routes" instance=ExtResource("5_ff66y")]
+offset_left = 703.0
+offset_top = 548.0
+offset_right = 722.0
+offset_bottom = 665.0
+rotation = -8.92507
+
+[node name="Helena-Denver" parent="Routes" instance=ExtResource("5_ff66y")]
+offset_left = 827.0
+offset_top = 577.0
+offset_right = 846.0
+offset_bottom = 726.0
+rotation = -9.78859
+
+[node name="Helena-Omaha" parent="Routes" instance=ExtResource("5_ff66y")]
+offset_left = 781.0
+offset_top = 453.0
+offset_right = 800.0
+offset_bottom = 639.0
+rotation = -7.48021
+
+[connection signal="card_drawn" from="TtrBoard2/Deck" to="." method="_on_deck_card_drawn"]
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]

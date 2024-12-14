@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8386diiseqoo"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_5n16l"]
+[ext_resource type="Texture2D" uid="uid://cjfuc0jdds4ar" path="res://ttrBoard2.jpg" id="1_7mtma"]
+[ext_resource type="Texture2D" uid="uid://dq3j5b7cpb02s" path="res://white card.jpg" id="2_36d04"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_5n16l")
+
+[node name="TtrBoard2" type="Sprite2D" parent="."]
+position = Vector2(958, 554)
+texture = ExtResource("1_7mtma")
+
+[node name="WhiteCard" type="Sprite2D" parent="TtrBoard2"]
+position = Vector2(-444, 466)
+scale = Vector2(0.516304, 0.5)
+texture = ExtResource("2_36d04")

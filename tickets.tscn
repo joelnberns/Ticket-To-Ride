@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://bu4t7nnuemggq"]
+
+[ext_resource type="Script" path="res://tickets.gd" id="1_b5hao"]
+[ext_resource type="Texture2D" uid="uid://slpa3hb6j8ct" path="res://cards/tickets/ticket_back2.png" id="2_e2vya"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_b5hao")
+
+[node name="Cards" type="Node" parent="."]
+
+[node name="Deck" type="TextureButton" parent="."]
+offset_left = 200.0
+offset_top = 10.0
+offset_right = 339.0
+offset_bottom = 223.0
+rotation = 1.5708
+pivot_offset = Vector2(65, 100)
+texture_normal = ExtResource("2_e2vya")
+texture_pressed = ExtResource("2_e2vya")
+texture_hover = ExtResource("2_e2vya")
+texture_disabled = ExtResource("2_e2vya")
+texture_focused = ExtResource("2_e2vya")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Discard Button" type="Button" parent="Deck"]
+layout_mode = 0
+offset_left = 97.0
+offset_top = 88.0
+offset_right = 233.0
+offset_bottom = 119.0
+rotation = -1.5708
+pivot_offset = Vector2(68, 15)
+text = "Discard Selected"
+
+[connection signal="button_up" from="Deck" to="." method="_on_deck_button_up"]
+[connection signal="button_up" from="Deck/Discard Button" to="." method="_on_discard_button_button_up"]

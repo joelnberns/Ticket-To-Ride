@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://csta6s5vvtghd"]
+
+[ext_resource type="Script" path="res://card_base.gd" id="1_rngno"]
+[ext_resource type="Texture2D" uid="uid://tqh7scgib3gl" path="res://cards/train cards/red.png" id="2_tcxgk"]
+
+[node name="CardBase" type="MarginContainer"]
+z_index = 1
+offset_left = -2.0
+offset_right = 112.0
+offset_bottom = 177.0
+pivot_offset = Vector2(125, 175)
+script = ExtResource("1_rngno")
+
+[node name="Card" type="Sprite2D" parent="."]
+position = Vector2(55, 88)
+scale = Vector2(0.765625, 0.769531)
+texture = ExtResource("2_tcxgk")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8386diiseqoo"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_5n16l"]
+[ext_resource type="Texture2D" uid="uid://cjfuc0jdds4ar" path="res://ttrBoard2.jpg" id="1_7mtma"]
+[ext_resource type="Texture2D" uid="uid://cqi7uca14n5cc" path="res://red_score.png" id="5_fhgig"]
+[ext_resource type="PackedScene" uid="uid://bq1yxwlkgtt2q" path="res://deck.tscn" id="6_xn3vd"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_5n16l")
+
+[node name="TtrBoard2" type="Sprite2D" parent="."]
+position = Vector2(628, 203)
+texture = ExtResource("1_7mtma")
+centered = false
+
+[node name="RedScore" type="Sprite2D" parent="TtrBoard2"]
+position = Vector2(-119, 442)
+scale = Vector2(0.0103688, 0.0087857)
+texture = ExtResource("5_fhgig")
+
+[node name="Deck" parent="TtrBoard2" instance=ExtResource("6_xn3vd")]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[connection signal="card_drawn_from_deck" from="TtrBoard2/Deck" to="." method="_on_deck_card_drawn_from_deck"]

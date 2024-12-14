@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://byw3dawxx4j7m"]
+
+[ext_resource type="Script" path="res://ticket.gd" id="1_q5v7y"]
+
+[node name="Sprite2D" type="Sprite2D"]
+rotation = -1.5708
+script = ExtResource("1_q5v7y")
