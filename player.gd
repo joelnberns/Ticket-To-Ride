@@ -3,12 +3,13 @@ class_name player
 
 var playerNum
 var playerColor = "blue"
-var trains = 3
+var trains = 15
 var trainHand := hand.new()
-var connections = {"Vancouver": {}, "Seattle": {}, "Portland": {}, "San Francisco": {}, "Los Angeles": {}, "Calcary": {}, "Helena": {}, "Salt Lake City": {}, "Las Vegas": {}, "Phoenix": {}, "Winnipeg": {}, "Duluth": {}, "Denver": {}, "Santa Fe": {}, "El Paso": {}, "Omaha": {}, "Kansas City": {}, "Oklahoma City": {}, "Dallas": {}, "Houston": {}, "Sault St Marie": {}, "Toronto": {}, "Chicago": {}, "Saint Louis": {}, "Little Rock": {}, "New Orleans": {}, "Pittsburgh": {}, "Nashville": {}, "Atlanta": {}, "Miami": {}, "Montreal": {}, "Boston": {}, "New York": {}, "Washington": {}, "Raleigh": {}, "Charleston": {}}
+var connections = {"Vancouver": {}, "Seattle": {}, "Portland": {}, "San Francisco": {}, "Los Angeles": {}, "Calgary": {}, "Helena": {}, "Salt Lake City": {}, "Las Vegas": {}, "Phoenix": {}, "Winnipeg": {}, "Duluth": {}, "Denver": {}, "Santa Fe": {}, "El Paso": {}, "Omaha": {}, "Kansas City": {}, "Oklahoma City": {}, "Dallas": {}, "Houston": {}, "Sault St Marie": {}, "Toronto": {}, "Chicago": {}, "Saint Louis": {}, "Little Rock": {}, "New Orleans": {}, "Pittsburgh": {}, "Nashville": {}, "Atlanta": {}, "Miami": {}, "Montreal": {}, "Boston": {}, "New York": {}, "Washington": {}, "Raleigh": {}, "Charleston": {}}
 var completedRoutes = {}
 var longestRoute := 0
 var score := 0
+var CPU := false
 var scoreMarker
 var updatedCities = {}
 var tickets = []                                                         
@@ -35,34 +36,29 @@ func _update_connections(city1: String, city2: String, newCity: String, trains: 
 		connections[newCity][city2] = routeDistance
 		if routeDistance > longestRoute: # check for longest route
 			longestRoute = routeDistance
-	print(city2, "-", newCity, ": ", routeDistance)
 	visitedRoutes[route] = null
 	for nextCity in connections[city2].keys():
 		if ((_check_route_completed(city2, nextCity) and _check_route_not_visited(city2, nextCity, visitedRoutes)) or (_check_route_completed(nextCity, city2) and _check_route_not_visited(nextCity, city2, visitedRoutes))): # make sure route exists and has not been visited
 				_update_connections(city2, nextCity, newCity, routeDistance, visitedRoutes)
-	if city2 == newCity: # circle detected
-		print("Circle")
-		var circleCities = {}
-		for circleRoute in visitedRoutes: # get all cities in circle
-			var circleCityArray = r.splitRoute(circleRoute)
-			var circleCity1 = circleCityArray[0]
-			var circleCity2 = circleCityArray[1]
-			circleCities[circleCity1] = null
-			circleCities[circleCity2] = null
-			connections[circleCity1][circleCity1] = routeDistance
-			connections[circleCity2][circleCity2] = routeDistance
-		for completedRoute in completedRoutes:
-			var completedRouteArray = r.splitRoute(completedRoute)
-			var completedRouteCity1 = completedRouteArray[0]
-			var completedRouteCity2 = completedRouteArray[1]
-			if completedRouteCity1 in circleCities and completedRouteCity2 not in circleCities:
-				_update_connections(completedRouteCity1, completedRouteCity2, completedRouteCity1, routeDistance, visitedRoutes)
-			if completedRouteCity2 in circleCities and completedRouteCity1 not in circleCities:
-				_update_connections(completedRouteCity2, completedRouteCity1, completedRouteCity2, routeDistance, visitedRoutes)
-				
-				
-			
-			
+	#if city2 == newCity: # circle detected
+		#var circleCities = {}
+		#for circleRoute in visitedRoutes: # get all cities in circle
+			#var circleCityArray = r.splitRoute(circleRoute)
+			#var circleCity1 = circleCityArray[0]
+			#var circleCity2 = circleCityArray[1]
+			#circleCities[circleCity1] = null
+			#circleCities[circleCity2] = null
+			#connections[circleCity1][circleCity1] = routeDistance
+			#connections[circleCity2][circleCity2] = routeDistance
+		#for completedRoute in completedRoutes:
+			#var completedRouteArray = r.splitRoute(completedRoute)
+			#var completedRouteCity1 = completedRouteArray[0]
+			#var completedRouteCity2 = completedRouteArray[1]
+			#if completedRouteCity1 in circleCities and completedRouteCity2 not in circleCities:
+				#_update_connections(completedRouteCity1, completedRouteCity2, completedRouteCity1, routeDistance, visitedRoutes)
+			#if completedRouteCity2 in circleCities and completedRouteCity1 not in circleCities:
+				#_update_connections(completedRouteCity2, completedRouteCity1, completedRouteCity2, routeDistance, visitedRoutes)
+
 	#print(connections)
 	visitedRoutes.erase(route)
 	
@@ -108,3 +104,14 @@ func _reveal_tickets(): # move tickets back up at beginning of turn
 	for card in tickets:
 		var tween = card.get_tree().create_tween()
 		tween.parallel().tween_property(card, "position", card.position + Vector2(0, -1000), 0.7)
+		
+		
+		
+# CPU functions
+
+func _CPU_draw_card(display : Array):
+	for card in trainHand.cards:
+		var color = card.cardColor
+		for i in range(display.size()):
+			if color == display[i].cardColor:
+				return i

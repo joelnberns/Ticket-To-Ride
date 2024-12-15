@@ -30,7 +30,7 @@ func _ready() -> void:
 	for i in range(0, number_of_wilds):
 		discard.push_back(_initialize_card("wild"))
 	_shuffle()
-	var farthestCard = 900
+	var farthestCard = 800
 	$display1.position = Vector2($DeckDraw.position.x + 20 + 0.2*farthestCard, $DeckDraw.position.y)
 	$display2.position = Vector2($DeckDraw.position.x + 20 + 0.4*farthestCard, $DeckDraw.position.y)
 	$display3.position = Vector2($DeckDraw.position.x + 20 + 0.6*farthestCard, $DeckDraw.position.y)
@@ -82,7 +82,6 @@ func _on_deck_draw_button_up() -> void:
 			return
 	if not SignalBus.betweenTurns:
 		if deck.size() == 0:
-			print("shuffle")
 			_shuffle()
 		var drawn_card = deck.pop_front()
 		drawn_card.position = $DeckDraw.position
@@ -95,19 +94,18 @@ func _on_gui_input(event: InputEvent, card, i) -> void:
 			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 				if get_parent().get_parent().ticketsDrawn == true: # Cannot take if tickets have been drawn
 					if get_parent().get_parent().has_method("_display_error"):
-						get_parent().get_parent()._display_error("Already drew tickets!")
+						get_parent().get_parent()._display_error("Already drew tickets!", "red")
 						return
 				if card.cardColor == "wild":
 					if get_parent().get_parent().cardTaken == true: # Cannot take a wild if card has already been drawn
 						if get_parent().get_parent().has_method("_display_error"):
-							get_parent().get_parent()._display_error("Cannot take a wild!")
+							get_parent().get_parent()._display_error("Cannot take a wild!", "red")
 							return
 					await emit_signal("wild_drawn_fron_display") # end turn if a wild is drawn
 				emit_signal("card_drawn", display[i])
 				display[i].gui_input.disconnect(_on_gui_input.bind(display[i], i))
 				_add_to_display(i)
 				if deck.size() == 0:
-					print("shuffle")
 					_shuffle()
 			
 			

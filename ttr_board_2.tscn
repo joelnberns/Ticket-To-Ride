@@ -1,22 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8386diiseqoo"]
+[gd_scene load_steps=6 format=3 uid="uid://b8386diiseqoo"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_5n16l"]
 [ext_resource type="Texture2D" uid="uid://cjfuc0jdds4ar" path="res://ttrBoard2.jpg" id="1_7mtma"]
-[ext_resource type="PackedScene" uid="uid://5bk2lq3lbn00" path="res://scoreMarker.tscn" id="5_rcq81"]
 [ext_resource type="PackedScene" uid="uid://ba671ysh5mfc2" path="res://route2.tscn" id="6_qiogv"]
 [ext_resource type="PackedScene" uid="uid://bu4t7nnuemggq" path="res://tickets.tscn" id="6_rs3ns"]
 [ext_resource type="PackedScene" uid="uid://bq1yxwlkgtt2q" path="res://deck.tscn" id="6_xn3vd"]
-
-[sub_resource type="Gradient" id="Gradient_4p5oy"]
-offsets = PackedFloat32Array(0.9375, 1)
-colors = PackedColorArray(1, 0, 0, 1, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ewomy"]
-resource_local_to_scene = true
-gradient = SubResource("Gradient_4p5oy")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(1, 0.5)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_5n16l")
@@ -3014,17 +3002,12 @@ offset_bottom = 855.0
 rotation = -1.97256
 scale = Vector2(1.52891, 0.465362)
 
-[node name="redScore" parent="TtrBoard2" instance=ExtResource("5_rcq81")]
-position = Vector2(25.2448, 745.576)
-scale = Vector2(0.40148, 0.411446)
-texture = SubResource("GradientTexture2D_ewomy")
-
 [node name="tickets" parent="." instance=ExtResource("6_rs3ns")]
 
 [node name="Start Turn" type="Button" parent="."]
-offset_left = 900.0
+offset_left = 822.0
 offset_top = 966.0
-offset_right = 992.0
+offset_right = 1063.0
 offset_bottom = 997.0
 text = "Begin Turn"
 

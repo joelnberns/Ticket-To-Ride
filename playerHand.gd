@@ -35,7 +35,6 @@ func _on_gui_input(event: InputEvent, card: cardBase):
 			else:
 				selectedCards.erase(card)
 				card.position.y += 50
-	print(selectedCards)
 	
 func _reorganize_hand():
 	selectedCards.clear()
@@ -51,6 +50,8 @@ func _reorganize_hand():
 		#angle = PI/2 + cardSpread*(float(cards.size())/2 - cards.size())
 		oval_angle_vector = Vector2(hor_rad*cos(angle), -ver_rad*sin(angle))
 		new_position = center_card_oval + oval_angle_vector - card.size/2
+		if switch == 1:
+			new_position += Vector2(0, increase)
 		var tween = card.get_tree().create_tween()
 		tween.tween_property(card, "position", new_position, 0.3).from(card.position)
 		#card.scale *= deck.cardSize/card.size

@@ -19,4 +19,4 @@ texture = SubResource("GradientTexture2D_p166n")
 script = ExtResource("1_rxxqo")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.6
+wait_time = 0.5

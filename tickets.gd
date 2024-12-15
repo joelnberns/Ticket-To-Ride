@@ -81,7 +81,6 @@ func _on_discard_button_button_up() -> void:
 			discardPile.push_back(card)
 			var tween = create_tween()
 			tween.tween_property(card, "position", $Deck.position + + Vector2(-58, 220), 0.5)
-		print(discardPile)
 		ticketsTaken = false
 		emit_signal("ticketsSelected", ticketArray)
 		

@@ -18,6 +18,5 @@ func _input(event: InputEvent) -> void:
 				
 
 func _set_texture(route : String):
-	print(route)
 	var img = str("res://cards/tickets/", route, ".png")
 	texture = load(img)
