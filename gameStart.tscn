@@ -1,0 +1,105 @@
+[gd_scene load_steps=3 format=3 uid="uid://csdg0pdn1hpj0"]
+
+[ext_resource type="Script" path="res://game_start.gd" id="1_1oamx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s55c2"]
+border_width_top = 50
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 3.0
+
+[node name="Panel" type="Panel"]
+offset_left = 121.0
+offset_top = 20.0
+offset_right = 433.0
+offset_bottom = 269.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_s55c2")
+script = ExtResource("1_1oamx")
+
+[node name="humanPlayersSelect" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 243.0
+offset_top = 85.0
+offset_right = 285.0
+offset_bottom = 116.0
+item_count = 6
+popup/item_0/text = "0"
+popup/item_1/text = "1"
+popup/item_1/id = 1
+popup/item_2/text = "2"
+popup/item_2/id = 2
+popup/item_3/text = "3"
+popup/item_3/id = 3
+popup/item_4/text = "4"
+popup/item_4/id = 4
+popup/item_5/text = "5"
+popup/item_5/id = 5
+
+[node name="computerPlayersSelect" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 243.0
+offset_top = 132.0
+offset_right = 285.0
+offset_bottom = 163.0
+selected = 0
+item_count = 6
+popup/item_0/text = "0"
+popup/item_1/text = "1"
+popup/item_1/id = 1
+popup/item_2/text = "2"
+popup/item_2/id = 2
+popup/item_3/text = "3"
+popup/item_3/id = 3
+popup/item_4/text = "4"
+popup/item_4/id = 4
+popup/item_5/text = "5"
+popup/item_5/id = 5
+
+[node name="game options" type="Label" parent="."]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 2.0
+offset_right = 300.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Game Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="human players" type="Label" parent="."]
+layout_mode = 0
+offset_left = -36.0
+offset_top = 76.0
+offset_right = 265.0
+offset_bottom = 124.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Human players"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="computer players" type="Label" parent="."]
+layout_mode = 0
+offset_left = -39.0
+offset_top = 121.0
+offset_right = 262.0
+offset_bottom = 169.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Computer players"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 95.0
+offset_top = 189.0
+offset_right = 218.0
+offset_bottom = 227.0
+text = "Start Game!"
+
+[connection signal="item_selected" from="humanPlayersSelect" to="." method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="humanPlayersSelect" to="." method="_on_human_players_select_item_selected"]
+[connection signal="item_selected" from="computerPlayersSelect" to="." method="_on_computer_players_select_item_selected"]
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]

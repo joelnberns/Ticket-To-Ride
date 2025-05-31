@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=3 uid="uid://wdkvxwomebeo"]
+
+[ext_resource type="Texture2D" uid="uid://wu17rg4lhjcd" path="res://trains/Red Train.png" id="1_2a6e0"]
+[ext_resource type="Script" path="res://player_info.gd" id="1_6kp46"]
+[ext_resource type="Texture2D" uid="uid://sotbfrky245" path="res://star2.png" id="4_dl13o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_01w5s"]
+border_width_left = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.6, 0.6, 0.6, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kb2o3"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6kp46")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 117.0
+offset_bottom = 101.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_01w5s")
+
+[node name="trainPanel" type="Panel" parent="Panel"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 18.0
+offset_right = 61.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_kb2o3")
+
+[node name="train" type="TextureRect" parent="Panel/trainPanel"]
+layout_mode = 0
+offset_top = -9.0
+offset_right = 40.0
+offset_bottom = 32.0
+texture = ExtResource("1_2a6e0")
+expand_mode = 1
+
+[node name="star" type="TextureRect" parent="Panel/trainPanel"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 25.0
+offset_right = 38.0
+offset_bottom = 66.0
+texture = ExtResource("4_dl13o")
+expand_mode = 1
+
+[node name="trains" type="Label" parent="Panel/trainPanel"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = -1.0
+offset_right = 75.0
+offset_bottom = 22.0
+text = "52"
+
+[node name="points" type="Label" parent="Panel/trainPanel"]
+layout_mode = 0
+offset_left = 49.0
+offset_top = 39.0
+offset_right = 75.0
+offset_bottom = 62.0
+text = "0"

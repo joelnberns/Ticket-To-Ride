@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fvic6jhjljcc"
-path="res://.godot/imported/back_card.jpg-72baa324b32ac9e0b96556a31d951057.ctex"
+uid="uid://c62s6ien4xm3l"
+path="res://.godot/imported/Black Train.png-a9b79168dbeaa366cddd8e84e8c041a2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/back_card.jpg"
-dest_files=["res://.godot/imported/back_card.jpg-72baa324b32ac9e0b96556a31d951057.ctex"]
+source_file="res://trains/Black Train.png"
+dest_files=["res://.godot/imported/Black Train.png-a9b79168dbeaa366cddd8e84e8c041a2.ctex"]
 
 [params]
 

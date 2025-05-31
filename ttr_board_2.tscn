@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8386diiseqoo"]
+[gd_scene load_steps=8 format=3 uid="uid://b8386diiseqoo"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_5n16l"]
 [ext_resource type="Texture2D" uid="uid://cjfuc0jdds4ar" path="res://ttrBoard2.jpg" id="1_7mtma"]
 [ext_resource type="PackedScene" uid="uid://ba671ysh5mfc2" path="res://route2.tscn" id="6_qiogv"]
+[ext_resource type="PackedScene" uid="uid://wdkvxwomebeo" path="res://playerInfo.tscn" id="6_qy0gv"]
 [ext_resource type="PackedScene" uid="uid://bu4t7nnuemggq" path="res://tickets.tscn" id="6_rs3ns"]
 [ext_resource type="PackedScene" uid="uid://bq1yxwlkgtt2q" path="res://deck.tscn" id="6_xn3vd"]
+[ext_resource type="PackedScene" uid="uid://csdg0pdn1hpj0" path="res://gameStart.tscn" id="7_h7p0l"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_5n16l")
@@ -3012,7 +3014,7 @@ offset_bottom = 997.0
 text = "Begin Turn"
 
 [node name="Timer" type="Timer" parent="Start Turn"]
-wait_time = 0.5
+wait_time = 0.3
 
 [node name="Error Message" type="Label" parent="."]
 modulate = Color(1, 0, 0, 1)
@@ -3027,7 +3029,21 @@ horizontal_alignment = 1
 
 [node name="Error Timer" type="Timer" parent="Error Message"]
 
+[node name="Control" parent="." instance=ExtResource("6_qy0gv")]
+visible = false
+offset_left = 1218.0
+offset_top = 2.0
+offset_right = 1218.0
+offset_bottom = 2.0
+
+[node name="gameStart" parent="." instance=ExtResource("7_h7p0l")]
+offset_left = 783.0
+offset_top = 447.0
+offset_right = 1095.0
+offset_bottom = 696.0
+
 [connection signal="card_drawn" from="TtrBoard2/Deck" to="." method="_on_deck_card_drawn"]
 [connection signal="wild_drawn_fron_display" from="TtrBoard2/Deck" to="." method="_on_deck_wild_drawn_fron_display"]
 [connection signal="ticketsSelected" from="tickets" to="." method="_on_node_tickets_selected"]
 [connection signal="ticketsSelected" from="tickets" to="." method="_on_tickets_tickets_selected"]
+[connection signal="gameStarted" from="gameStart" to="." method="_on_game_start_game_started"]

@@ -23,7 +23,6 @@ func _process(delta: float) -> void:
 func _move_marker(points : int, currentPlayer : player, direction : int):
 	for i in range(points):
 		currentPlayer.score += 1*direction
-		print(currentPlayer.score)
 		var tween = create_tween()
 		if ((currentPlayer.score %100) > 0) and ((currentPlayer.score % 100) <= 20):
 			if (((currentPlayer.score - 20) % 100) == 0) and (direction == -1):

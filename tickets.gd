@@ -35,6 +35,9 @@ func _process(delta: float) -> void:
 	
 
 func _on_deck_button_up(discardLimit = 2) -> void:
+	#for ticket in selectedCards:
+		#selectedCards.erase(ticket)
+		#ticket.modulate = Color(1, 1, 1)
 	if not SignalBus.betweenTurns:
 		if get_parent().cardTaken:
 			get_parent()._display_error("Already drew a card!")
@@ -44,8 +47,11 @@ func _on_deck_button_up(discardLimit = 2) -> void:
 			if deck.size() == 0:
 				discardPile.shuffle()
 				deck = discardPile.duplicate()
+				#for card in deck:
+					#card.ticket_clicked.connect(_handle_click)
 				discardPile.clear()
 			var card = deck.pop_front()
+			card.inDeck = false
 			ticketArray.push_back(card)
 		var tween = create_tween()
 		ticketArray[0].visible = true
@@ -61,12 +67,12 @@ func _on_deck_button_up(discardLimit = 2) -> void:
 	
 	
 func _handle_click(ticket):
-	if ticket not in selectedCards and discards > 0:
+	if not ticket.inDeck and ticket not in selectedCards and discards > 0:
 		selectedCards.push_back(ticket)
 		ticketArray.erase(ticket)
 		ticket.modulate = Color(0.616, 1, 1)
 		discards -= 1
-	elif ticket in selectedCards:
+	elif not ticket.inDeck and ticket in selectedCards:
 		selectedCards.erase(ticket)
 		ticketArray.push_back(ticket)
 		ticket.modulate = Color(1, 1, 1)
@@ -76,15 +82,18 @@ func _handle_click(ticket):
 func _on_discard_button_button_up() -> void:
 	$"Deck/Discard Button".visible = false
 	if ticketsTaken:
+		print("Selected cards: ", selectedCards.size())
 		for card in selectedCards:
-			card.ticket_clicked.disconnect(_handle_click)
+			card.inDeck = true
 			discardPile.push_back(card)
 			var tween = create_tween()
-			tween.tween_property(card, "position", $Deck.position + + Vector2(-58, 220), 0.5)
+			tween.tween_property(card, "position", $Deck.position + Vector2(-58, 220), 0.2)
+			card.modulate = Color(1, 1, 1)
+		for card in ticketArray:
+			card.ticket_clicked.disconnect(_handle_click)
 		ticketsTaken = false
+		selectedCards.clear()
 		emit_signal("ticketsSelected", ticketArray)
 		
-func _next_player():
-	pass
 	
 		

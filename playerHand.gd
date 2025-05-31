@@ -9,6 +9,7 @@ var cards = []
 var viewport_size = Vector2(1600, 648)
 var selectedCards = []
 var handParent = Node2D.new()
+var cardColors = ["red", "blue", "yellow", "green", "orange", "pink", "white", "black"]
 
 var center_card_oval = viewport_size * Vector2(0.58, 2)
 var hor_rad = viewport_size.x*0.7
@@ -20,6 +21,7 @@ var new_position
 var card
 var increase
 var switch 
+
 func draw_card(card : cardBase):
 	cards.push_back(card)
 	_reorganize_hand()
@@ -66,10 +68,42 @@ func _reorganize_hand():
 func _hide_cards():
 	for card in cards:
 		var tween = card.get_tree().create_tween()
-		tween.parallel().tween_property(card, "position", card.position + Vector2(0, 200), 0.7)
+		tween.parallel().tween_property(card, "position", card.position + Vector2(0, 200), 0.4)
 
 func _reveal_cards():
 	for card in cards:
 		var tween = card.get_tree().create_tween()
-		tween.parallel().tween_property(card, "position", card.position + Vector2(0, -200), 0.7)
+		tween.parallel().tween_property(card, "position", card.position + Vector2(0, -200), 0.4)
+		
+func _CPU_draw_card(card : cardBase):
+	var color = card.cardColor
+	var oldScale = card.scale
+	card._set_texture("back_card")
+	card.scale *= Vector2(200, 220)/card.texture.get_size()
+	cards.push_back(card)
+	selectedCards.clear()
+	var tween = card.get_tree().create_tween()
+	tween.tween_property(card, "position", Vector2(928, 1500), 0.3)
+	await tween.finished
+	card._set_texture(color)
+	card.scale = oldScale
+	
+	
+	
+func _CPU_cards_for_route(color : String, cardsNeeded : int):
+	if color == "grey":
+		for colorForGrey in cardColors:
+			if(_CPU_cards_for_route(colorForGrey, cardsNeeded)):
+				return true
+		return false
+	
+	else:
+		for card in cards:
+			if card.cardColor == color or card.cardColor == "wild":
+				selectedCards.push_back(card)
+				if selectedCards.size() == cardsNeeded:
+					return true
+		selectedCards.clear()
+		return false
+	return true
 		

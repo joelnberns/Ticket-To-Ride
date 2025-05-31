@@ -30,12 +30,12 @@ func _ready() -> void:
 	for i in range(0, number_of_wilds):
 		discard.push_back(_initialize_card("wild"))
 	_shuffle()
-	var farthestCard = 800
-	$display1.position = Vector2($DeckDraw.position.x + 20 + 0.2*farthestCard, $DeckDraw.position.y)
-	$display2.position = Vector2($DeckDraw.position.x + 20 + 0.4*farthestCard, $DeckDraw.position.y)
-	$display3.position = Vector2($DeckDraw.position.x + 20 + 0.6*farthestCard, $DeckDraw.position.y)
-	$display4.position = Vector2($DeckDraw.position.x + 20 + 0.8*farthestCard, $DeckDraw.position.y)
-	$display5.position = Vector2($DeckDraw.position.x + 20 + farthestCard, $DeckDraw.position.y)
+	var farthestCard = 700
+	$display1.position = Vector2($DeckDraw.position.x + 50 + 0.2*farthestCard, $DeckDraw.position.y)
+	$display2.position = Vector2($DeckDraw.position.x + 50 + 0.4*farthestCard, $DeckDraw.position.y)
+	$display3.position = Vector2($DeckDraw.position.x + 50 + 0.6*farthestCard, $DeckDraw.position.y)
+	$display4.position = Vector2($DeckDraw.position.x + 50 + 0.8*farthestCard, $DeckDraw.position.y)
+	$display5.position = Vector2($DeckDraw.position.x + 50 + farthestCard, $DeckDraw.position.y)
 	for i in range(5):
 		await _add_to_display(i)
 		
@@ -78,7 +78,7 @@ func _shuffle():
 func _on_deck_draw_button_up() -> void:
 	if get_parent().get_parent().ticketsDrawn == true: # Cannot take if tickets have been drawn
 		if get_parent().get_parent().has_method("_display_error"):
-			get_parent().get_parent()._display_error("Already drew tickets!")
+			get_parent().get_parent()._display_error("Already drew tickets!", "red")
 			return
 	if not SignalBus.betweenTurns:
 		if deck.size() == 0:
@@ -107,6 +107,15 @@ func _on_gui_input(event: InputEvent, card, i) -> void:
 				_add_to_display(i)
 				if deck.size() == 0:
 					_shuffle()
+					
+func _CPU_draw_card(i) -> void:
+	if not SignalBus.betweenTurns:
+		emit_signal("card_drawn", display[i])
+		display[i].gui_input.disconnect(_on_gui_input.bind(display[i], i))
+		_add_to_display(i)
+		if deck.size() == 0:
+			_shuffle()
+
 			
 			
 			

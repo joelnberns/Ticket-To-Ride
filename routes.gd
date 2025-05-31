@@ -5,6 +5,8 @@ var routes := {"Santa Fe-Oklahoma City": [3, "blue"], "Vancouver-Calgary": [3, "
 
 var ticketDict = {"Calgary-Phoenix": 13, "Dallas-New York": 11, "Houston-Washington": 10, "Las Vegas-New York": 19, "Los Angeles-Atlanta": 15, "Los Angeles-Calgary": 12, "Montreal-Atlanta": 9, "Montreal-Chicago": 7, "Phoenix-Boston": 19, "Portland-Pittsburgh": 19, "San Francisco-Sault St Marie": 17, "Sault St Marie-Miami": 12, "Sault St Marie-Nashville": 8, "Sault St Marie-Oklahoma City": 8, "Seattle-Las Vegas": 10}
 
+var completedRoutes = []
+
 
 func splitRoute(route : String) -> Array:
 	var city1 = route.get_slice("-", 0)
